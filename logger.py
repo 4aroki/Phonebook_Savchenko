@@ -1,5 +1,13 @@
 from data_create import name_data, surname_data, phone_data, address_data
 
+file_name = 'data_first_var.csv'
+
+def write_file(content):
+     with open(file_name, 'w') as f:
+        f.write(''.join(content))
+
+
+
 
 def input_data():
     name = name_data()
@@ -48,7 +56,6 @@ print_data
 
 
 def update_data():
-    file_name = 'data_first_var.csv'
     name = name_data()
     with open(file_name, 'r', encoding='utf-8') as f:
         data_first = f.readlines()
@@ -75,9 +82,8 @@ def update_data():
         data_first_list[updated_index] = updated_record
         print(data_first_list)
 
+    write_file(data_first_list)
 
-    with open(file_name, 'w') as f:
-        f.write(''.join(data_first_list))
         
 
 
@@ -100,8 +106,7 @@ def delete_data():
         print(data_first_list)
 
 
-    with open(file_name, 'w') as f:
-        f.write(''.join(data_first_list))
+    write_file(data_first_list)
 
     
 
