@@ -10,6 +10,6 @@ def phone_data():
  phone = input('Введите телефон: ')
  return phone
 
-def adress_data():
- adress = input('Введите адрес: ')
- return adress
+def address_data():
+ address = input('Введите адрес: ')
+ return address
