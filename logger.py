@@ -6,6 +6,18 @@ def write_file(content):
      with open(file_name, 'w') as f:
         f.write(''.join(content))
 
+def read_file():
+    with open(file_name, 'r', encoding='utf-8') as f:
+        data_first = f.readlines()
+        data_first_list = []
+        j = 0
+        for i in range(len(data_first)):
+            if data_first[i] == '\n' or i == len(data_first) - 1:
+                    data_first_list.append(''.join(data_first[j:i+1]))
+                    j = i
+
+    return data_first_list 
+
 
 
 
@@ -57,30 +69,21 @@ print_data
 
 def update_data():
     name = name_data()
-    with open(file_name, 'r', encoding='utf-8') as f:
-        data_first = f.readlines()
-        data_first_list = []
-        j = 0
-        for i in range(len(data_first)):
-            if data_first[i] == '\n' or i == len(data_first) - 1:
-                    data_first_list.append(''.join(data_first[j:i+1]))
-                    j = i
+    data_first_list = read_file()
 
-
-        print(data_first_list)
-        record_to_update = list(filter(lambda x: (name) in x, data_first_list))
-        if len(record_to_update) == 0:
-             print('Запись не найдена')
-             return
-        print('Введите новые значения для записи: ')
-        name = name_data()
-        surname = surname_data()
-        phone = phone_data()
-        address = address_data()
-        updated_record = f"{name} \n{surname} \n{phone} \n{address} \n \n"
-        updated_index = data_first_list.index(record_to_update[0])
-        data_first_list[updated_index] = updated_record
-        print(data_first_list)
+    record_to_update = list(filter(lambda x: (name) in x, data_first_list))
+    if len(record_to_update) == 0:
+        print('Запись не найдена')
+        return
+    print('Введите новые значения для записи: ')
+    name = name_data()
+    surname = surname_data()
+    phone = phone_data()
+    address = address_data()
+    updated_record = f"{name} \n{surname} \n{phone} \n{address} \n \n"
+    updated_index = data_first_list.index(record_to_update[0])
+    data_first_list[updated_index] = updated_record
+  
 
     write_file(data_first_list)
 
@@ -89,21 +92,13 @@ def update_data():
 
 
 def delete_data():
-    file_name = 'data_first_var.csv'
     name = name_data()
-    with open(file_name, 'r', encoding='utf-8') as f:
-        data_first = f.readlines()
-        data_first_list = []
-        j = 0
-        for i in range(len(data_first)):
-            if data_first[i] == '\n' or i == len(data_first) - 1:
-                    data_first_list.append(''.join(data_first[j:i+1]))
-                    j = i
+    data_first_list = read_file()
 
 
-        print(data_first_list)
-        data_first_list = list(filter(lambda x: not(name) in x, data_first_list))
-        print(data_first_list)
+    print(data_first_list)
+    data_first_list = list(filter(lambda x: not(name) in x, data_first_list))
+    print(data_first_list)
 
 
     write_file(data_first_list)
